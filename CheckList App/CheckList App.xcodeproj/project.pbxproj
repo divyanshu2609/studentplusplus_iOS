@@ -11,6 +11,8 @@
 		E8129C722108A0BC00E6A3B0 /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8129C712108A0BC00E6A3B0 /* AllListViewController.swift */; };
 		E8129C742108A94800E6A3B0 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8129C732108A94800E6A3B0 /* List.swift */; };
 		E8129C762109CF1700E6A3B0 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8129C752109CF1700E6A3B0 /* ListDetailViewController.swift */; };
+		E8129C78210D902500E6A3B0 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8129C77210D902500E6A3B0 /* DataModel.swift */; };
+		E8129C7F210DBA7100E6A3B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8129C7E210DBA7100E6A3B0 /* Constants.swift */; };
 		E83B20D021032563008E578F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83B20CF21032563008E578F /* AppDelegate.swift */; };
 		E83B20D221032563008E578F /* CheckListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83B20D121032563008E578F /* CheckListController.swift */; };
 		E83B20D521032563008E578F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83B20D321032563008E578F /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 		E8129C712108A0BC00E6A3B0 /* AllListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
 		E8129C732108A94800E6A3B0 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		E8129C752109CF1700E6A3B0 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		E8129C77210D902500E6A3B0 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E8129C7E210DBA7100E6A3B0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E83B20CC21032563008E578F /* CheckList App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CheckList App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83B20CF21032563008E578F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E83B20D121032563008E578F /* CheckListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListController.swift; sourceTree = "<group>"; };
@@ -47,10 +51,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E8129C79210DB92F00E6A3B0 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				E8129C77210D902500E6A3B0 /* DataModel.swift */,
+				E8129C732108A94800E6A3B0 /* List.swift */,
+				E83B20E121032694008E578F /* Item.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		E8129C7A210DB95C00E6A3B0 /* Controlllers */ = {
+			isa = PBXGroup;
+			children = (
+				E8129C752109CF1700E6A3B0 /* ListDetailViewController.swift */,
+				E83B20E321035E32008E578F /* ItemDetailViewController.swift */,
+				E8129C712108A0BC00E6A3B0 /* AllListViewController.swift */,
+				E83B20D121032563008E578F /* CheckListController.swift */,
+			);
+			path = Controlllers;
+			sourceTree = "<group>";
+		};
+		E8129C7B210DB99100E6A3B0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E8129C6F2104733800E6A3B0 /* String+CheckList.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E8129C7C210DB9BE00E6A3B0 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E83B20D321032563008E578F /* Main.storyboard */,
+				E83B20D821032563008E578F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E8129C7D210DBA0F00E6A3B0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E8129C7E210DBA7100E6A3B0 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E83B20C321032563008E578F = {
 			isa = PBXGroup;
 			children = (
 				E83B20CE21032563008E578F /* CheckList App */,
+				E83B20DB21032563008E578F /* Info.plist */,
+				E83B20D621032563008E578F /* Assets.xcassets */,
 				E83B20CD21032563008E578F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,17 +119,11 @@
 			isa = PBXGroup;
 			children = (
 				E83B20CF21032563008E578F /* AppDelegate.swift */,
-				E8129C752109CF1700E6A3B0 /* ListDetailViewController.swift */,
-				E83B20D121032563008E578F /* CheckListController.swift */,
-				E83B20E321035E32008E578F /* ItemDetailViewController.swift */,
-				E83B20D321032563008E578F /* Main.storyboard */,
-				E83B20D621032563008E578F /* Assets.xcassets */,
-				E83B20D821032563008E578F /* LaunchScreen.storyboard */,
-				E83B20DB21032563008E578F /* Info.plist */,
-				E83B20E121032694008E578F /* Item.swift */,
-				E8129C6F2104733800E6A3B0 /* String+CheckList.swift */,
-				E8129C712108A0BC00E6A3B0 /* AllListViewController.swift */,
-				E8129C732108A94800E6A3B0 /* List.swift */,
+				E8129C7D210DBA0F00E6A3B0 /* Utils */,
+				E8129C7B210DB99100E6A3B0 /* Extensions */,
+				E8129C79210DB92F00E6A3B0 /* Modal */,
+				E8129C7A210DB95C00E6A3B0 /* Controlllers */,
+				E8129C7C210DB9BE00E6A3B0 /* Storyboards */,
 			);
 			path = "CheckList App";
 			sourceTree = "<group>";
@@ -159,9 +205,11 @@
 				E8129C742108A94800E6A3B0 /* List.swift in Sources */,
 				E83B20E221032694008E578F /* Item.swift in Sources */,
 				E83B20D021032563008E578F /* AppDelegate.swift in Sources */,
+				E8129C7F210DBA7100E6A3B0 /* Constants.swift in Sources */,
 				E83B20E421035E32008E578F /* ItemDetailViewController.swift in Sources */,
 				E8129C702104733800E6A3B0 /* String+CheckList.swift in Sources */,
 				E8129C762109CF1700E6A3B0 /* ListDetailViewController.swift in Sources */,
+				E8129C78210D902500E6A3B0 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Z733TJ4N9;
-				INFOPLIST_FILE = "CheckList App/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DDSG.CheckList-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -315,7 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Z733TJ4N9;
-				INFOPLIST_FILE = "CheckList App/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DDSG.CheckList-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";

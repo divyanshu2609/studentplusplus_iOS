@@ -8,6 +8,8 @@
 
 import Foundation
 extension String{
+    
+    // function strings(byAppendingPaths) exists for NSString only, so making an extension for String to be able to use this function with String too.
     func stringByAppendingPathComponent(path: String) -> String {
         let string = self as NSString
         let pathStrings = string.strings(byAppendingPaths: [path])
