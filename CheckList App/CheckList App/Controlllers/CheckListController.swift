@@ -87,17 +87,19 @@ class CheckListController: UITableViewController, AddItemControllerDelegate {
     }
 
     func configureCheckmarkForCell(cell:UITableViewCell,forItem item: Item){
-        let label = cell.viewWithTag(101) as! UILabel
+        let label = cell.viewWithTag(Constants.ViewTags.checkMarkItemLabelTag) as! UILabel
         if item.isChecked!{
             label.text = Constants.SpecialSymbols.checkMark
+            label.textColor = view.tintColor
         }else{
             label.text = ""
         }
     }
     
     func configureLabelForCell(cell:UITableViewCell,forItem item: Item){
-        let label = cell.viewWithTag(100) as! UILabel
+        let label = cell.viewWithTag(Constants.ViewTags.checkListItemLabelTag) as! UILabel
         label.text = item.name
+//        label.text = "\(item.itemID): \(item.name!)"
     }
     
     

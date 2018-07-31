@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = window?.rootViewController as! UINavigationController
         let viewController = navigationController.viewControllers[0] as! AllListViewController
         viewController.dataModel = dataModel
+        
         return true
     }
 
@@ -46,6 +48,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataModel.saveCheckLists()
     }
 
+//    func registerUserNotification(){
+//        let center = UNUserNotificationCenter.current()
+//        let options: UNAuthorizationOptions = [.alert, .sound]
+//        center.requestAuthorization(options: options, completionHandler:{
+//            (granted, error) in
+//            if !granted{
+//                print("Something went wrong!")
+//            }
+//        })
+//
+//        center.getNotificationSettings(completionHandler: {
+//            (settings) in
+//            if settings.authorizationStatus != .authorized{
+//                print("Notification not authorized")
+//            } else {
+//                print("Notification authorized")
+//                let content = UNMutableNotificationContent()
+//                content.title = "Testing Notification"
+//                content.body = "test is done! All is well"
+//                content.sound = UNNotificationSound.default()
+//
+//                let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date(timeIntervalSinceNow: 30))
+//
+//                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+//
+//                let identifier = "UYLCalenderNotification"
+//                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+//                center.add(request) { (error) in
+//                    if let error = error{
+//                        print(error.localizedDescription)
+//                    }
+//                }
+//            }
+//        })
+//    }
 
 }
+
 

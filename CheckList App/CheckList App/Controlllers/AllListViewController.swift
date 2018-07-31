@@ -15,12 +15,17 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.delegate = self
-        let index = UserDefaults.standard.integer(forKey: Constants.UserDefaultKeys.checkListIndex)
-        if (index != 0){
-            let checkList = dataModel.lists[index - 1]
+        let index = dataModel.indexOfSelectedCheckList
+        if (index >= 0 && index < dataModel.lists.count){
+            let checkList = dataModel.lists[index]
             performSegue(withIdentifier: Constants.SegueIdentifiers.showChecklist, sender: checkList)
         }
     }
@@ -36,9 +41,11 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
         
         var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
         cell.accessoryType = .detailDisclosureButton
+        cell.imageView?.image = UIImage(named: list.iconName)
+        configureItemDoneLabelForCell(cell: cell, forList: list)
         configureLabelForCell(cell: cell, forList: list)
         return cell
     }
@@ -51,8 +58,7 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = dataModel.lists[indexPath.row]
-        // if the key is not found it returns 0 so we start indexing by 1
-        UserDefaults.standard.set(indexPath.row + 1, forKey: Constants.UserDefaultKeys.checkListIndex)
+        dataModel.indexOfSelectedCheckList = indexPath.row
         performSegue(withIdentifier: Constants.SegueIdentifiers.showChecklist, sender: list)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -68,7 +74,7 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if viewController === self{
-            UserDefaults.standard.set(0, forKey: Constants.UserDefaultKeys.checkListIndex)
+            dataModel.indexOfSelectedCheckList = -1
         }
     }
     
@@ -77,21 +83,15 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
     }
     
     func addListController(controller: ListDetailViewController, didFinishAddingList list: List) {
-        let index = dataModel.lists.count
         dataModel.lists.append(list)
-        let indexPath = NSIndexPath(row: index, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic)
+        dataModel.sortCheckLists()
+        tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }
     
     func addListController(controller: ListDetailViewController, didFinishEditingList list: List) {
-        if let index = dataModel.lists.index(where: {$0 === list}){
-            let indexPath = NSIndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath as IndexPath){
-                configureLabelForCell(cell: cell, forList: list)
-            }
-        }
+        dataModel.sortCheckLists()
+        tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -109,5 +109,16 @@ class AllListViewController: UITableViewController, AddListControllerDelegate, U
     // Put the list name into the label field.
     func configureLabelForCell(cell: UITableViewCell, forList list:List){
         cell.textLabel?.text = list.name
+    }
+    
+    func configureItemDoneLabelForCell(cell: UITableViewCell, forList list:List){
+        let countUncheckedItems = list.countUncheckedItems()
+        if list.items.count == 0{
+            cell.detailTextLabel?.text = "(No items)"
+        } else if countUncheckedItems == 0{
+            cell.detailTextLabel?.text = "All done!"
+        } else {
+            cell.detailTextLabel?.text = "\(countUncheckedItems) Remaining"
+        }
     }
 }

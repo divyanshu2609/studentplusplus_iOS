@@ -8,12 +8,15 @@
 
 import UIKit
 
-class ListDetailViewController: UITableViewController, UITextFieldDelegate{
+class ListDetailViewController: UITableViewController, UITextFieldDelegate, IconPickerControllerDelegate{
+   
+    var iconName = "Folder"
     weak var delegate: AddListControllerDelegate?
     var listToEdit: List?
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +24,14 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate{
         if let list = listToEdit{
             title = "Edit List"
             nameTextField.text = list.name
+            iconName = list.iconName
             doneBarButton.isEnabled = true
         } else {
             title = "Add List"
             doneBarButton.isEnabled = false
         }
+        
+        iconImageView.image = UIImage(named: iconName)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,9 +46,10 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate{
     @IBAction func doneButtonPressed(_ sender: Any) {
         if let list = listToEdit{
             list.name = nameTextField.text!
+            list.iconName = iconName
             delegate?.addListController(controller: self, didFinishEditingList: list)
         }else{
-            let list = List(name: nameTextField.text!)
+            let list = List(name: nameTextField.text!, iconName: iconName)
             delegate?.addListController(controller: self, didFinishAddingList: list)
         }
     }
@@ -55,12 +62,29 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate{
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+        if indexPath.section == 1{
+            return indexPath
+        } else{
+            return nil
+        }
+    }
+    
+    func iconPicker(picker: IconPickerViewController, didPickIcon iconName: String) {
+        self.iconName = iconName
+        iconImageView.image = UIImage(named: iconName)
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nameTextField.resignFirstResponder()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PickIcon"{
+            let pickIconController = segue.destination as! IconPickerViewController
+            pickIconController.delegate = self
+        }
     }
 }
 

@@ -14,15 +14,29 @@ struct Constants{
     
     struct UserDefaultKeys{
         static let checkListIndex = "CheckListIndex"
+        static let checkListItemID = "CheckListItemID"
     }
     
     struct StoryboardIds{
         static let addListNavigationController = "AddListNavigationController"
     }
     
+    struct NotificationIdentifiers {
+        static let calenderNotificationIdentifier = "CalenderNotification"
+        static let timeIntervalIdentifier = "UYLLocalNotification"
+    }
+    
+    struct ViewTags{
+        static let checkListItemLabelTag = 100
+        static let checkMarkItemLabelTag = 101
+        static let datePickerTag = 102
+    }
+    
     struct CellIdentifiers{
         static let allListTableViewCell = "AllListTableViewCell"
         static let checklistitem = "ChecklistItem"
+        static let iconPickerCell = "IconPickerCell"
+        static let datePickerCell = "DatePickerCell"
     }
     
     struct SegueIdentifiers {
@@ -30,6 +44,7 @@ struct Constants{
         static let addChecklist = "AddList"
         static let addItem = "AddItem"
         static let editItem = "EditItem"
+        static let pickIcon = "PickIcon"
     }
     
     struct SpecialSymbols{
@@ -40,12 +55,16 @@ struct Constants{
     struct CodingKeys{
         static let mainModelKey = "CheckLists"
         struct List {
-            static let name = "name"
-            static let items = "items"
+            static let name = "Name"
+            static let items = "Items"
+            static let iconName = "IconName"
         }
         struct Item {
-            static let name = "name"
-            static let isChecked = "isChecked"
+            static let name = "Name"
+            static let isChecked = "IsChecked"
+            static let dueDate = "DueDate"
+            static let shouldRemind = "ShouldRemind"
+            static let itemId = "ItemId"
         }
     }
 }
