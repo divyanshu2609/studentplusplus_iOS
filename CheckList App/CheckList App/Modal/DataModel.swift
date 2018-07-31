@@ -24,15 +24,18 @@ class DataModel{
         registerUserDefaults()
     }
 
+    //returns path to sandbox excluding filename
     func documentsDirectory()->String{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         return paths[0]
     }
     
+    // path to sandbox with file name
     func dataFilePath()->String{
         return documentsDirectory().stringByAppendingPathComponent(path: Constants.Paths.saveWithFileName)
     }
     
+    //save checklist into the app's sandbox
     func saveCheckLists(){
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
@@ -41,6 +44,7 @@ class DataModel{
         data.write(toFile: dataFilePath(), atomically: true)
     }
     
+    //load checklist from the app's sandbox
     func loadCheckLists(){
         let path = dataFilePath()
         print(path)
@@ -54,15 +58,18 @@ class DataModel{
         }
     }
     
+    //registering user defaults
     func registerUserDefaults(){
         let keyValue = [Constants.UserDefaultKeys.checkListIndex: -1, Constants.UserDefaultKeys.checkListItemID: 0]
         UserDefaults.standard.register(defaults: keyValue)
     }
     
+    // logic for the list sorting
     func sortCheckLists(){
         lists.sort(by: {list1,list2 in return list1.name.localizedStandardCompare(list2.name) == ComparisonResult.orderedAscending})
     }
     
+    //calculates unique id for the items
     class func nextCheckListItemID()-> Int{
         let userDefaults = UserDefaults.standard
         let itemID = userDefaults.integer(forKey: Constants.UserDefaultKeys.checkListItemID)

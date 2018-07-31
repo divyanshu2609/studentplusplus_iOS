@@ -125,7 +125,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             item.name = itemNameTextField.text
             item.shouldRemind = remindMeSwitch.isOn
             item.dueDate = dueDate
-            item.scheduleNotification()
+           // item.scheduleNotification()                done in checklistController
             delegate?.addItemController(controller: self, didFinishEditingItem: item)
         } else {
             let item = Item()
@@ -133,7 +133,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             item.isChecked = false
             item.shouldRemind = remindMeSwitch.isOn
             item.dueDate = dueDate
-            item.scheduleNotification()
+          //  item.scheduleNotification()               done in checklistController
             delegate?.addItemController(controller: self, didFinishAddingItem: item)
         }
     }
@@ -150,10 +150,8 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     
     func updateDueDateLabel(){
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        dueDateLabel.text = formatter.string(from: dueDate as Date)
+        let date = dueDate as Date
+        dueDateLabel.text = date.formatInString()
     }
     
     func showDatePicker(){

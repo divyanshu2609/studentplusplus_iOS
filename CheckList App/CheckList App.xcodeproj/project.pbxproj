@@ -21,6 +21,7 @@
 		E83B20E221032694008E578F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83B20E121032694008E578F /* Item.swift */; };
 		E83B20E421035E32008E578F /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83B20E321035E32008E578F /* ItemDetailViewController.swift */; };
 		E8F76B50210F8293008B2C68 /* UserNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F76B4F210F8293008B2C68 /* UserNotificationHandler.swift */; };
+		E8F76B5221106C92008B2C68 /* Date + Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F76B5121106C92008B2C68 /* Date + Checklist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E83B20E321035E32008E578F /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		E8F76B4D210E46AA008B2C68 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		E8F76B4F210F8293008B2C68 /* UserNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationHandler.swift; sourceTree = "<group>"; };
+		E8F76B5121106C92008B2C68 /* Date + Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Checklist.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				E8129C6F2104733800E6A3B0 /* String+CheckList.swift */,
+				E8F76B5121106C92008B2C68 /* Date + Checklist.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				E83B20D221032563008E578F /* CheckListController.swift in Sources */,
 				E8129C742108A94800E6A3B0 /* List.swift in Sources */,
 				E83B20E221032694008E578F /* Item.swift in Sources */,
+				E8F76B5221106C92008B2C68 /* Date + Checklist.swift in Sources */,
 				E83B20D021032563008E578F /* AppDelegate.swift in Sources */,
 				E8129C81210E1A2700E6A3B0 /* IconPickerViewController.swift in Sources */,
 				E8129C7F210DBA7100E6A3B0 /* Constants.swift in Sources */,

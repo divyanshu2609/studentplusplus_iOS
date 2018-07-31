@@ -18,6 +18,7 @@ class Item: NSObject, NSCoding{
     var itemID: Int?
     
     override init(){
+        //unique id given at time of initialization
         itemID = DataModel.nextCheckListItemID()
         super.init()
     }
@@ -42,37 +43,36 @@ class Item: NSObject, NSCoding{
         aCoder.encode(itemID, forKey: Constants.CodingKeys.Item.itemId)
     }
     
+    // toggles the property isChecked on rowclick
     func toggleChecked(){
         isChecked = !isChecked!
     }
     
-    func scheduleNotification(){
+    // schedule a notification on List item
+    func scheduleNotification(forList list: List){
         removeNotificationsForThisItem(itemID: self.itemID!)
         if shouldRemind! && dueDate.compare(Date()) != ComparisonResult.orderedAscending{
             let content = UNMutableNotificationContent()
-            //content.title = "Testing Notification"
-            content.body = self.name!
+            content.body = list.name
+            content.title = self.name!
+            content.subtitle = (self.dueDate as Date).formatInString()
             content.sound = UNNotificationSound.default()
             content.userInfo = ["ItemID" : self.itemID]
            
             let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute], from: dueDate as Date)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-            let identifier = Constants.NotificationIdentifiers.calenderNotificationIdentifier
+            let identifier = UserNotificationHandler.makeIdentifierString(baseIdentifier: Constants.NotificationIdentifiers.calenderNotificationIdentifier, Id: String(itemID!))
             UserNotificationHandler.scheduleNotification(content: content, trigger: trigger, identifier: identifier)
         }
     }
     
+    // removes the notification for an item from Notification Center for a particluar item ID
     func removeNotificationsForThisItem(itemID: Int){
         let closure = {
             (notifications: [UNNotificationRequest])->UNNotificationRequest? in
-//            print(notifications)
-//            print("item id : \(itemID)")
             for notification in notifications{
-//                print(notification)
                 if let number = notification.content.userInfo["ItemID"] as? NSNumber{
-//                    print(number.intValue)
                     if number.intValue == itemID{
-//                        print("found an existing notification \(notification)")
                         return notification
                     }
                 }
@@ -82,8 +82,8 @@ class Item: NSObject, NSCoding{
         UserNotificationHandler.getAllNotifications(closure: closure)
     }
     
+    // Called when the item gets destroyed - both when individual items gets deleted as well as the whole list gets deleted.
     deinit {
-//        print(self)
         removeNotificationsForThisItem(itemID: self.itemID!)
     }
 }

@@ -30,6 +30,7 @@ struct Constants{
         static let checkListItemLabelTag = 100
         static let checkMarkItemLabelTag = 101
         static let datePickerTag = 102
+        static let checkListItemSubtitleLabelTag = 103
     }
     
     struct CellIdentifiers{

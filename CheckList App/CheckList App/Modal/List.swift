@@ -14,6 +14,7 @@ class List: NSObject, NSCoding {
     var iconName: String
     var items = [Item]()
     
+    //convinience is used as we have called the init on the same class inside an init.
     convenience init(name: String) {
         self.init(name: name, iconName: "No Icon")
     }
@@ -41,6 +42,7 @@ class List: NSObject, NSCoding {
         super.init()
     }
     
+    // counts the number of unchecked items
     func countUncheckedItems()->Int{
         var count = 0
         for item in items{
@@ -49,5 +51,10 @@ class List: NSObject, NSCoding {
             }
         }
         return count
+    }
+    
+    //sorting the checklist items
+    func sortCheckListItems(){
+        items.sort(by: {item1,item2 in return (item1.dueDate as Date).compare(item2.dueDate as Date) == ComparisonResult.orderedAscending})
     }
 }

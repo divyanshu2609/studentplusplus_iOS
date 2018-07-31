@@ -51,21 +51,17 @@ class CheckListController: UITableViewController, AddItemControllerDelegate {
     }
     
     func addItemController(controller: ItemDetailViewController, didFinishAddingItem item: Item) {
-        let itemsCount = checkList.items.count
+        item.scheduleNotification(forList: checkList)
         checkList.items.append(item)
-        let indexPath = NSIndexPath(row: itemsCount, section: 0)
-        let insertPaths = [indexPath]
-        tableView.insertRows(at: insertPaths as [IndexPath], with: .automatic)
+        checkList.sortCheckListItems()
+        tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }
     
     func addItemController(controller: ItemDetailViewController, didFinishEditingItem item: Item) {
-        if let index = checkList.items.index(where: {$0 === item}){
-            let indexPath = NSIndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath as IndexPath){
-                configureLabelForCell(cell: cell, forItem: item)
-            }
-        }
+        item.scheduleNotification(forList: checkList)
+        checkList.sortCheckListItems()
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
@@ -99,7 +95,10 @@ class CheckListController: UITableViewController, AddItemControllerDelegate {
     func configureLabelForCell(cell:UITableViewCell,forItem item: Item){
         let label = cell.viewWithTag(Constants.ViewTags.checkListItemLabelTag) as! UILabel
         label.text = item.name
-//        label.text = "\(item.itemID): \(item.name!)"
+        
+        let subtitleLabel = cell.viewWithTag(Constants.ViewTags.checkListItemSubtitleLabelTag) as! UILabel
+        let date = item.dueDate as Date
+        subtitleLabel.text = date.formatInString()
     }
     
     
